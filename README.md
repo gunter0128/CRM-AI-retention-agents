@@ -176,6 +176,7 @@ cd CRM-AI-retention-agents
 python -m venv venv
 venv/Scripts/activate      # Windows
 # source venv/bin/activate # Mac/Linux
+$env:OPENAI_API_KEY="你的API_KEY"(若沒有api_key可見demo.pdf中的展示結果截圖)
 
 pip install -r requirements.txt
 ```
