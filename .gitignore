@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environment
+venv/
+.env/
+
+# Streamlit cache
+.streamlit/
+
+# Model files
+models/
+*.pkl
+
+# Data files
+data/raw/
+data/processed/
+data/final/
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# VSCode
+.vscode/
+
+# Mac / Windows system files
+.DS_Store
+Thumbs.db
