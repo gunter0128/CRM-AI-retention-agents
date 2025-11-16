@@ -26,7 +26,7 @@
 * Streamlit Dashboard 讓主管可以直接操作 Demo
 
 專案目的：
-**讓面試官清楚看到我能將資料處理、ML、業務規則、LLM、多代理、前端整合成一套真正能用的企業 AI 系統。**
+**讓主管看到我能將資料處理、ML、業務規則、LLM、多代理、前端整合成一套真正能用的企業 AI 系統。**
 
 ---
 
@@ -82,7 +82,6 @@
 | 40–79               | 中價值  |
 | < 40                | 低價值  |
 
-（面試時可講：實務上會替換成 CLV / 盈利 / 行為價值模型）
 
 ---
 
@@ -215,15 +214,7 @@ models/churn_model.pkl
 
 ---
 
-## 5.5 測試端到端 Pipeline（指令列 Demo）
-
-```bash
-python test_pipeline.py
-```
-
----
-
-## 5.6 啟動 Streamlit Dashboard（重點 Demo）
+## 5.5 啟動 Streamlit Dashboard（重點 Demo）
 
 ```bash
 streamlit run src/app_streamlit.py
