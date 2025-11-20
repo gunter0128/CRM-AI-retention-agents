@@ -30,101 +30,124 @@
 
 ---
 
-# 系統輸入（Input）
+# **CRM AI Agents 專案：快速總覽（Problem / Input / Output）**
 
-### 1. Telco Customer Churn Dataset（Kaggle）
+## 專案快速總覽（Problem / Input / Output）
 
-每位客戶包含多項欄位（本專案使用其中 20+ 欄）：
+---
+
+## 要解決的問題（Problem）
+
+企業在管理 CRM 客戶時，常遇到下列痛點：
+
+* 客戶「何時會流失」難以提前預測，往往發生後才知道
+* 客服 / 行銷無法判斷「為什麼某位客戶即將流失」
+* 不同客群（高價值、中價值、低價值）缺乏一致的挽留策略
+* 挽留方案沒有系統化規則，常依個人經驗判斷
+* Email / 簡訊 / 電話話術需要人工撰寫，耗時且不一致
+* CRM 團隊難以每天做大量客戶的風險分析
+
+本專案透過 **流失預測模型 + 客戶價值分群 + LLM 多代理（Agents）**，
+協助 CRM / 行銷 / 客服主管自動產生：
+
+* 流失風險評估
+* 流失原因總結
+* 客群挽留方案
+* Email / SMS / 電話話術（可直接使用）
+
+使企業能 **提前挽留客戶、降低流失率、提升營收與顧客終身價值（CLV）**。
+
+---
+
+## 系統輸入（Input）
+
+### 1. Kaggle Telco Customer Churn Dataset（主要欄位）
+
+包含超過 20 個客戶特徵：
 
 * `customerID`
-* `gender`
-* `SeniorCitizen`
-* `Partner`
-* `Dependents`
 * `tenure`
-* `PhoneService`
-* `MultipleLines`
-* `InternetService`
-* `OnlineSecurity`
-* `OnlineBackup`
-* `DeviceProtection`
-* `TechSupport`
-* `StreamingTV`
-* `StreamingMovies`
-* `Contract`
-* `PaperlessBilling`
-* `PaymentMethod`
 * `MonthlyCharges`
 * `TotalCharges`
-* `Churn`（標籤，用於模型訓練）
+* `Contract`
+* `PaymentMethod`
+* `InternetService`
+* `TechSupport`
+* `OnlineSecurity`
+* `SeniorCitizen`
+* `Dependents`
+* `PhoneService`
+* …
 
-### 2. 自建衍生欄位（Synthetic）
-
-為了讓多代理能進行更貼近企業 CRM 的推論，本專案額外加入：
+### 2. 自建衍生欄位（更貼近企業 CRM 資料）
 
 * `recent_login_count`（最近 30 天登入次數）
 * `complain_count`（客服抱怨次數）
 * `usage_drop_rate`（使用量下降幅度）
 
-### 3. 使用者的自然語言操作（於 UI）
+### 3. 使用者操作（透過 UI 選取客戶）
 
-在 Streamlit dashboard 中，使用者可選擇：
+* 指定客戶 ID
+* 或「隨機抽取一位客戶」進行分析
 
-* 指定查詢某位客戶
-* 或「隨機選一位客戶」進行 Demo
-
-無需輸入語句，系統會自動執行整條管線。
+（系統會自動執行所有 Agents）
 
 ---
 
-# 系統輸出（Output）
+## 系統輸出（Output）
 
 ### 1. 流失風險分析（Churn Risk Assessment）
 
 * 流失機率（0~1）
-* 風險等級（高 / 中 / 低）
-* 主要影響因子（例如：合約類型、月租金額、任期）
-
-### 2. 主要流失原因（Churn Reason Summary）
-
-* 自然語言推論的流失原因總結
-* 例：
-
-  * 「月租金偏高，且近期使用量大幅下降」
-  * 「已接近合約期滿，沒有綁約誘因」
-  * 「過去一個月多次聯絡客服」
-
-### 3. 挽留方案（Retention Campaign Plan）
-
-依照客戶價值（高 / 中 / 低）與原因，產生：
-
-* 推薦方案（折扣、升級、免費體驗…）
-* 適用原因說明
-* 預期效果（例如提升續約率、降低不滿）
-
-### 4. 客戶溝通內容（Customer Communication）
-
-可直接使用的實際文案：
-
-* Email（完整一封）
-* SMS（70 字內）
-* Call script（客服逐字稿）
-
-範例：
-
-```
-以下是完整 Email / 簡訊 / 電話話術內容
-（點擊展開查看）
-```
+* 高 / 中 / 低風險標籤
+* 主因指標（例如合約類型、月租、任期等）
 
 ---
 
-# 參考資料（Data Sources）
+### 2. 主要流失原因總結（Churn Reason Summary）
+
+自然語言生成，包含：
+
+* 客戶最有可能流失的原因
+* 風險提升的行為線索
+* 對應的背景分析（如：登入下降、月費偏高、合約即將到期）
+
+---
+
+### 3. 挽留方案設計（Retention Campaigns）
+
+依據：
+
+* 客戶價值（高 / 中 / 低）
+* 流失原因
+* 價格敏感度、合約類型、使用習慣
+
+產生：
+
+* 挽留策略（折扣 / 升級 / 方案調整 / 免費體驗）
+* 適用情境與理由
+* 預期成效
+
+---
+
+### 4. 客戶溝通內容（Customer Communication）
+
+包含可直接使用的：
+
+* Email 文案（完整一封）
+* SMS（70 字）
+* 電話客服話術（逐字稿）
+
+以便業務、客服和行銷團隊立即執行挽留動作。
+
+---
+
+## 參考資料（Dataset & Modeling）
 
 * Telco Customer Churn Dataset（Kaggle）
-* 自建 synthetic 行為資料欄位（login、usage、complain）
-* 本專案訓練之 Logistic Regression churn model
-  
+* 自建 synthetic 行為資料（login / complain / usage）
+* Logistic Regression baseline churn model（可替換成 XGBoost）
+
 ---
 
 # 2. 系統架構概觀
