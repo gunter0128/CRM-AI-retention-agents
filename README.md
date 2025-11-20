@@ -30,13 +30,11 @@
 
 ---
 
-# **CRM AI Agents 專案：快速總覽（Problem / Input / Output）**
-
-## 專案快速總覽（Problem / Input / Output）
+# **2. CRM AI Agents 專案：快速總覽（Problem / Input / Output）**
 
 ---
 
-## 要解決的問題（Problem）
+## 2.1 要解決的問題（Problem）
 
 企業在管理 CRM 客戶時，常遇到下列痛點：
 
@@ -59,9 +57,9 @@
 
 ---
 
-## 系統輸入（Input）
+## 2.2 系統輸入（Input）
 
-### 1. Kaggle Telco Customer Churn Dataset（主要欄位）
+### 2.2.1 Kaggle Telco Customer Churn Dataset（主要欄位）
 
 包含超過 20 個客戶特徵：
 
@@ -79,13 +77,13 @@
 * `PhoneService`
 * …
 
-### 2. 自建衍生欄位（更貼近企業 CRM 資料）
+### 2.2.2 自建衍生欄位（更貼近企業 CRM 資料）
 
 * `recent_login_count`（最近 30 天登入次數）
 * `complain_count`（客服抱怨次數）
 * `usage_drop_rate`（使用量下降幅度）
 
-### 3. 使用者操作（透過 UI 選取客戶）
+### 2.2.3 使用者操作（透過 UI 選取客戶）
 
 * 指定客戶 ID
 * 或「隨機抽取一位客戶」進行分析
@@ -94,9 +92,9 @@
 
 ---
 
-## 系統輸出（Output）
+## 2.3 系統輸出（Output）
 
-### 1. 流失風險分析（Churn Risk Assessment）
+### 2.3.1 流失風險分析（Churn Risk Assessment）
 
 * 流失機率（0~1）
 * 高 / 中 / 低風險標籤
@@ -104,7 +102,7 @@
 
 ---
 
-### 2. 主要流失原因總結（Churn Reason Summary）
+### 2.3.2 主要流失原因總結（Churn Reason Summary）
 
 自然語言生成，包含：
 
@@ -114,7 +112,7 @@
 
 ---
 
-### 3. 挽留方案設計（Retention Campaigns）
+### 2.3.3 挽留方案設計（Retention Campaigns）
 
 依據：
 
@@ -130,7 +128,7 @@
 
 ---
 
-### 4. 客戶溝通內容（Customer Communication）
+### 2.3.4 客戶溝通內容（Customer Communication）
 
 包含可直接使用的：
 
@@ -142,7 +140,7 @@
 
 ---
 
-## 參考資料（Dataset & Modeling）
+## 2.3.5 參考資料（Dataset & Modeling）
 
 * Telco Customer Churn Dataset（Kaggle）
 * 自建 synthetic 行為資料（login / complain / usage）
@@ -150,13 +148,13 @@
 
 ---
 
-# 2. 系統架構概觀
+# 3. 系統架構概觀
 
 整體由四層組成：
 
 ---
 
-## 2.1 資料處理層（Data Prep）
+## 3.1 資料處理層（Data Prep）
 
 來源資料：
 **Kaggle – Telco Customer Churn dataset**
@@ -170,7 +168,7 @@
 
 ---
 
-## 2.2 流失預測層（Churn Model）
+## 3.2 流失預測層（Churn Model）
 
 模型：
 
@@ -192,7 +190,7 @@
 
 ---
 
-## 2.3 客戶價值分群（Customer Value Segmentation）
+## 3.3 客戶價值分群（Customer Value Segmentation）
 
 本專案使用簡單但企業常用的「月租金額」區分：
 
@@ -205,7 +203,7 @@
 
 ---
 
-## 2.4 AI Agents 層（LLM Multi-Agents）
+## 3.4 AI Agents 層（LLM Multi-Agents）
 
 專案共分為 **四個 AI Agents**：
 
@@ -235,7 +233,7 @@
 
 ---
 
-# 3. 使用資料集：Telco Customer Churn（Kaggle）
+# 4. 使用資料集：Telco Customer Churn（Kaggle）
 
 來源：
 [https://www.kaggle.com/blastchar/telco-customer-churn](https://www.kaggle.com/blastchar/telco-customer-churn)
@@ -254,7 +252,7 @@ data/raw/
 
 ---
 
-# 4. 專案目錄結構
+# 5. 專案目錄結構
 
 ```
 crm-ai-agents/
@@ -285,9 +283,9 @@ crm-ai-agents/
 
 ---
 
-# 5. 如何重現專案
+# 6. 如何重現專案
 
-## 5.1 建立環境
+## 6.1 建立環境
 
 ```bash
 git clone https://github.com/<your-account>/CRM-AI-retention-agents.git
@@ -303,7 +301,7 @@ pip install -r requirements.txt
 
 ---
 
-## 5.2 放置資料集
+## 6.2 放置資料集
 
 請將 Churn Dataset 放到：
 
@@ -313,7 +311,7 @@ data/raw/
 
 ---
 
-## 5.3 執行資料前處理
+## 6.3 執行資料前處理
 
 ```bash
 python -m src.data_prep
@@ -321,7 +319,7 @@ python -m src.data_prep
 
 ---
 
-## 5.4 訓練 Churn Model
+## 6.4 訓練 Churn Model
 
 ```bash
 python -m src.train_churn_model
@@ -335,7 +333,7 @@ models/churn_model.pkl
 
 ---
 
-## 5.5 啟動 Streamlit Dashboard（重點 Demo）
+## 6.5 啟動 Streamlit Dashboard（重點 Demo）
 
 ```bash
 streamlit run src/app_streamlit.py
@@ -352,15 +350,15 @@ streamlit run src/app_streamlit.py
 
 ---
 
-# 6. 模型與規則的可解釋性設計
+# 7. 模型與規則的可解釋性設計
 
-## 6.1 Churn Model（Logistic Regression）
+## 7.1 Churn Model（Logistic Regression）
 
 * 簡單、可解釋
 * 特徵影響方向明確
 * 可快速迭代 / 替換成更強模型（XGBoost）
 
-## 6.2 風險等級切分
+## 7.2 風險等級切分
 
 * 高風險：p ≥ 0.7
 * 中風險：0.4 ≤ p < 0.7
@@ -368,7 +366,7 @@ streamlit run src/app_streamlit.py
 
 可依企業 SLA / retention policy 調整。
 
-## 6.3 客群價值分群
+## 7.3 客群價值分群
 
 基於 `MonthlyCharges`：
 
@@ -382,7 +380,7 @@ streamlit run src/app_streamlit.py
 
 ---
 
-# 7. 企業價值（Business Impact）
+# 8. 企業價值（Business Impact）
 
 ### **① 自動化流失預測流程**
 
